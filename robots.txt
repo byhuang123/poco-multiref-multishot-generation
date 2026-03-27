@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://byhuang123.github.io/poco-multiref-multishot-generation/sitemap.xml
+Sitemap: https://poco-multiref-multishot.github.io/sitemap.xml
