@@ -3,9 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="./src/img/fanqie.png">
+<link rel="icon" type="image/png" href="./src/img/fanqie.png?v=20260403a">
 
 <!-- SEO -->
 <title>PoCo: Multi-Reference Multi-Shot Video Generation</title>
@@ -34,14 +37,14 @@
   }
 }
 </script>
-<link href="./src/css/style.css" rel="stylesheet">
-<link rel="stylesheet" href="./src/css/bulma.min.css">
-<link rel="stylesheet" href="./src/css/bulma-carousel.min.css">
-<link rel="stylesheet" href="./src/css/index.css">
+<link href="./src/css/style.css?v=20260403a" rel="stylesheet">
+<link rel="stylesheet" href="./src/css/bulma.min.css?v=20260403a">
+<link rel="stylesheet" href="./src/css/bulma-carousel.min.css?v=20260403a">
+<link rel="stylesheet" href="./src/css/index.css?v=20260403a">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./src/js/bulma-carousel.min.js"></script>
+<script src="./src/js/bulma-carousel.min.js?v=20260403a"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<script src="./src/js/index.js"></script>
+<script src="./src/js/index.js?v=20260403a"></script>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.1.1/model-viewer.min.js"></script>
 </head>
 
@@ -222,6 +225,7 @@
       const text = "Rethinking Position Embedding as a Context Controller\nfor Multi-Reference and Multi-Shot Video Generation";
       const typedElement = document.getElementById('typed-subtitle');
       let index = 0;
+      const styledSubtitleHTML = `Rethinking <span class="subtitle-key-1">Position Embedding</span> as a <span class="subtitle-key-2">Context Controller</span><br>for <span class="subtitle-key-lite">Multi-Reference</span> and <span class="subtitle-key-lite">Multi-Shot</span> Video Generation`;
 
       function typeWriter() {
         if (!typedElement) return;
@@ -237,6 +241,7 @@
           // Remove the blinking cursor border
           typedElement.style.borderRight = 'none';
           typedElement.style.animation = 'none';
+          typedElement.innerHTML = styledSubtitleHTML;
         }
       }
 
@@ -251,6 +256,18 @@
           animation: blink-cursor 1s infinite;
           padding-right: 3px;
           white-space: pre-line;
+        }
+        #typed-subtitle .subtitle-key-1 {
+          color: #67dfff;
+          font-weight: 700;
+        }
+        #typed-subtitle .subtitle-key-2 {
+          color: #ffc96a;
+          font-weight: 700;
+        }
+        #typed-subtitle .subtitle-key-lite {
+          color: rgba(255, 255, 255, 0.96);
+          font-weight: 600;
         }
       `;
       document.head.appendChild(style);
@@ -320,8 +337,8 @@
       <div style="background: #0a0a0a; border-radius: 22px; padding: 40px; text-align: center; position: relative; overflow: hidden;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1), transparent 50%); pointer-events: none;"></div>
         
-        <h3 style="font-size: 20px; color: transparent; background: linear-gradient(90deg, #fff, #e0e0ff); -webkit-background-clip: text; background-clip: text; margin: 0 0 15px 0; font-weight: 700; position: relative;">
-          <span class="sparkle-emoji">✨</span> Do you want to generate a <span style="font-style: italic;">short film with multi-reference control? </span> <span class="sparkle-emoji">✨</span>
+        <h3 style="font-size: 24px; color: transparent; background: linear-gradient(90deg, #7ee8ff 0%, #a0b9ff 32%, #ffd27a 68%, #ff9ac9 100%); -webkit-background-clip: text; background-clip: text; margin: 0 0 15px 0; font-weight: 800; letter-spacing: 0.2px; text-shadow: 0 0 22px rgba(126, 232, 255, 0.2); position: relative;">
+          <span class="sparkle-emoji">✨</span> Do you want to generate a <span style="font-style: italic;">short film with multi-reference and multi-shot control? </span> <span class="sparkle-emoji">✨</span>
         </h3>
         <p style="color: white; font-size: 20px; margin: 0; position: relative;">
           Recent proprietary models such as Sora‑2 demonstrate promising progress in generating multi‑shot videos conditioned on multiple reference characters. However, academic research on this problem remains limited.
@@ -524,13 +541,13 @@
       <div style="background: #0a0a0a; border-radius: 22px; padding: 24px; text-align: center; position: relative; overflow: hidden;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1), transparent 50%); pointer-events: none;"></div>
 
-        <p style="position: relative; z-index: 1; margin: 0 0 14px 0; color: rgba(255,255,255,0.92); font-size: 20px; line-height: 1.65; text-align: left; font-weight: 400;">
-          Why does reference confusion appear even when humans can distinguish these identities?
-          The core issue is that text prompts often cannot encode such fine-grained visual cues, so attention may still retrieve the wrong reference context.
+        <p style="position: relative; z-index: 1; margin: 0 auto 16px auto; padding: 0 8px; max-width: 1120px; color: rgba(255,255,255,0.92); font-size: 22px; line-height: 1.55; letter-spacing: 0.1px; text-align: left; font-weight: 430;">
+          Why does <span style="color:#ffbf47; font-weight:700;">reference confusion</span> still occur even when the identities are visually distinguishable?
+          The core issue is that text prompts are often too coarse to encode <span style="font-weight:700;">fine-grained identity cues</span> under <span style="color:#ffbf47; font-weight:700;">strong semantic overlap</span>, causing attention to retrieve the <span style="color:#55d9ff; font-weight:700;">wrong reference context</span>.
         </p>
 
         <div style="position: relative; z-index: 1; padding: 14px; border-radius: 16px; background: linear-gradient(180deg, #fbfbfd 0%, #eef2f7 100%); border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 12px 28px rgba(0,0,0,0.18);">
-          <img src="./motivation.png" alt="Motivation" style="width: 100%; height: auto; display: block; border-radius: 10px; background: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.08);" />
+          <img src="./motivation.png?v=20260403c" alt="Motivation" style="width: 100%; height: auto; display: block; border-radius: 10px; background: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.08);" />
         </div>
 
         <p style="position: relative; z-index: 1; margin: 18px 0 0 0; color: white; font-size: 20px; line-height: 1.6; text-align: left; font-weight: 400;">
@@ -595,8 +612,8 @@
           .poco-math-desc {
             margin: 0;
             color: rgba(255, 255, 255, 0.68);
-            font-size: 15px;
-            line-height: 1.75;
+            font-size: 17px;
+            line-height: 1.72;
           }
           .poco-math-grid {
             display: grid;
@@ -653,8 +670,8 @@
           .poco-math-subtitle {
             margin: 0 0 18px;
             color: rgba(255, 255, 255, 0.62);
-            font-size: 14px;
-            line-height: 1.65;
+            font-size: 16px;
+            line-height: 1.64;
             letter-spacing: 0.01em;
           }
           .poco-math-section {
@@ -668,7 +685,7 @@
           .poco-math-section-title {
             margin: 0 0 10px;
             color: rgba(255, 255, 255, 0.92);
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 700;
             letter-spacing: 0.03em;
             text-transform: none;
@@ -676,8 +693,8 @@
           .poco-math-preline {
             margin: 0 0 8px;
             color: rgba(255, 255, 255, 0.76);
-            font-size: 14px;
-            line-height: 1.7;
+            font-size: 16px;
+            line-height: 1.68;
             letter-spacing: 0.01em;
             font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
           }
@@ -710,13 +727,13 @@
           }
           .poco-math-formula-flow {
             color: #fff;
-            font-size: 0.98rem;
-            line-height: 1.82;
+            font-size: 1.04rem;
+            line-height: 1.8;
             overflow: hidden;
             padding: 0;
           }
           .poco-math-formula-flow mjx-container[display="true"] {
-            font-size: 108% !important;
+            font-size: 112% !important;
           }
           .poco-math-emphasis {
             margin-top: 16px;
@@ -725,19 +742,62 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
             color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            line-height: 1.72;
+            font-size: 16px;
+            line-height: 1.68;
+            letter-spacing: 0.01em;
+            font-weight: 430;
+            font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
           }
           .poco-math-inline-note {
             margin: 10px 0 0;
             color: rgba(255, 255, 255, 0.68);
-            font-size: 14px;
-            line-height: 1.72;
+            font-size: 16px;
+            line-height: 1.68;
+            font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
+          }
+          .poco-inline-var {
+            font-style: italic;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.94);
+          }
+          .poco-inline-math {
+            display: inline;
+            white-space: nowrap;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
             font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
           }
           @media (max-width: 1100px) {
             .poco-math-grid {
               grid-template-columns: 1fr;
+            }
+          }
+          @media (max-width: 760px) {
+            .poco-math-desc {
+              font-size: 16px;
+              line-height: 1.66;
+            }
+            .poco-math-subtitle {
+              font-size: 15px;
+              line-height: 1.6;
+            }
+            .poco-math-section-title {
+              font-size: 16px;
+            }
+            .poco-math-preline {
+              font-size: 15px;
+              line-height: 1.62;
+            }
+            .poco-math-formula-flow {
+              font-size: 0.98rem;
+            }
+            .poco-math-formula-flow mjx-container[display="true"] {
+              font-size: 106% !important;
+            }
+            .poco-math-inline-note,
+            .poco-math-emphasis {
+              font-size: 15px;
+              line-height: 1.62;
             }
           }
           body {
@@ -802,7 +862,7 @@
                     \]
                   </div>
                 </div>
-                <p class="poco-math-preline">Then apply blockwise rotations in the allocated \(t\), \(h\), and \(w\) subspaces.</p>
+                <p class="poco-math-preline">Then apply blockwise rotations in the allocated <span class="poco-inline-var">t</span>, <span class="poco-inline-var">h</span>, and <span class="poco-inline-var">w</span> subspaces.</p>
                 <div class="poco-math-paper">
                 <div class="poco-math-formula-flow">
                   \[
@@ -819,7 +879,7 @@
                   </div>
                 </div>
                 <p class="poco-math-inline-note">
-                  Only the \(t,h,w\) axes are modeled here, so reference identity is still resolved mainly through semantic similarity.
+                  Only the <span class="poco-inline-var">t</span>, <span class="poco-inline-var">h</span>, and <span class="poco-inline-var">w</span> axes are modeled here, so reference identity is still resolved mainly through semantic similarity.
                 </p>
               </div>
             </div>
@@ -828,7 +888,7 @@
               <span class="poco-math-tag">Ours</span>
               <h3>SideInfo-RoPE</h3>
               <p class="poco-math-subtitle">
-                Sec. 3.2: augment the original 3D-RoPE axes with a side-information coordinate \(s\).
+                Sec. 3.2: augment the original 3D-RoPE axes with a side-information coordinate <span class="poco-inline-var">s</span>.
               </p>
               <div class="poco-math-section">
                 <div class="poco-math-section-title">Side Information Distance</div>
@@ -841,13 +901,13 @@
                 </div>
                 </div>
                 <p class="poco-math-inline-note">
-                  Here \(s(x)\in\{0,1\}^{K}\) is a K-dimensional side-information vector; \(s_i(x)=1\) means reference \(i\) (for example, @Character1 or @Character2) is active for the current token/shot context.
+                  Here <span class="poco-inline-math">s(x) ∈ {0,1}<sup>K</sup></span> is a K-dimensional side-information vector; <span class="poco-inline-math">s<sub>i</sub>(x)=1</span> means reference <span class="poco-inline-var">i</span> (for example, @Character1 or @Character2) is active for the current token/shot context.
                 </p>
               </div>
 
               <div class="poco-math-section">
                 <div class="poco-math-section-title">SideInfo-RoPE Rotation</div>
-                <p class="poco-math-preline">Extend \(p=(t,h,w)\) to \(p^\ast=(t,h,w,s)\) and add the side-information rotation blocks.</p>
+                <p class="poco-math-preline">Extend <span class="poco-inline-math">p=(t,h,w)</span> to <span class="poco-inline-math">p<sup>*</sup>=(t,h,w,s)</span> and add the side-information rotation blocks.</p>
                 <div class="poco-math-paper">
                 <div class="poco-math-formula-flow">
                   \[
@@ -910,12 +970,11 @@
           src="./pipeline.png"
           alt="Pipeline"
           style="width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" />
-          <p style="margin: 18px 0 6px 0; color: white; font-size: 20px; line-height: 1.6; text-align: left; font-weight: 400;">
-            We propose a multi-reference and multi-shot video generation model that integrates reference images and per-shot captions for consistent and controllable generation.
-            (a) The overall architecture combines reference images, multi-shot captions, and latent video features through VAE and MultiShot-DiT blocks.
-            Each block includes <span style="color:#55d9ff; font-weight:700;">Hierarchical Cross-Attention</span> (b) and <span style="color:#ffbf47; font-weight:700;">Self-Attention with SideInfo-RoPE</span> (c).
-            (b) The hierarchical mask allows reference tokens to attend globally to all captions, while each shot's video tokens attend only to its corresponding text segment.
-            (c) SideInfo-RoPE assigns reference-specific phase codes in the rotary embedding space, improving shot-reference alignment and maintaining identity consistency across shots.
+          <p style="margin: 18px 0 6px 0; color: rgba(255,255,255,0.95); font-size: 20px; line-height: 1.6; text-align: left; font-weight: 400;">
+            We propose a multi-reference, multi-shot video generation model conditioned on reference images and per-shot captions.<br>
+            (a) The overall architecture integrates reference images, shot captions, and latent video features through VAE and MultiShot-DiT blocks. Each block contains <span style="color:#55d9ff; font-weight:700;">Hierarchical Cross-Attention</span> (b) and <span style="color:#ffbf47; font-weight:700;">Self-Attention with SideInfo-RoPE</span> (c).<br>
+            (b) The hierarchical mask allows reference tokens to attend to all captions, while video tokens in each shot attend only to their corresponding text segment.<br>
+            (c) SideInfo-RoPE assigns reference-specific phase codes in the rotary embedding space, so that temporally aligned shots inherit the corresponding phase patterns. Colored planes denote active rotations, while gray planes denote unrotated ones.
           </p>
           </div>
         </div>
@@ -930,7 +989,7 @@
 <!------------- More Results ------------------>
 <div class="more-results-section" style="display: flex; flex-direction: column; align-items: center; padding: 60px 20px; width: 100%; box-sizing: border-box; margin-top: 80px;">
   <h2 class="fancy-title" style="color: white; background: none !important; -webkit-text-fill-color: white !important; font-size: 48px; text-align: center; margin-bottom: 40px; font-weight: 700; letter-spacing: 2px;">
-    <span style="background: linear-gradient(135deg, #ff6b6b, #ffb347); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">⚠️</span> Hard Cases: Similar-Reference Confusion
+    🧩 Hard Cases: Identity Exchange Control<br>Under Semantic Overlap
   </h2>
 
   <div style="position: relative; max-width: 1800px; width: 100%; background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(78, 205, 196, 0.1)); padding: 40px; border-radius: 25px; border: 2px solid rgba(255, 107, 107, 0.5); box-shadow: 0 20px 60px rgba(255, 107, 107, 0.2), inset 0 0 20px rgba(78, 205, 196, 0.05); backdrop-filter: blur(10px);">
@@ -946,12 +1005,43 @@
       }
       .more-demo-note {
         color: rgba(255, 255, 255, 0.9);
-        text-align: center;
-        margin: 8px auto 18px;
+        text-align: left;
+        margin: 8px auto 26px;
+        padding: 0 8px;
+        max-width: 1160px;
         font-size: 20px;
-        letter-spacing: 0.2px;
-        line-height: 1.6;
+        letter-spacing: 0.1px;
+        line-height: 1.62;
         font-weight: 400;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .more-note-lead {
+        color: rgba(255, 255, 255, 0.95);
+        font-size: 22px;
+        line-height: 1.56;
+        font-weight: 500;
+      }
+      .more-note-cause {
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 20px;
+        line-height: 1.58;
+      }
+      .more-note-control {
+        color: rgba(255, 255, 255, 0.94);
+        font-size: 20px;
+        line-height: 1.58;
+        font-weight: 430;
+      }
+      .more-key-main {
+        color: #ffbf47;
+        font-weight: 700;
+      }
+      .more-key-accent {
+        color: #55d9ff;
+        font-weight: 700;
       }
       .more-demo-char1 {
         color: #55d9ff;
@@ -1063,6 +1153,20 @@
         background: #000;
       }
       @media (max-width: 760px) {
+        .more-demo-note {
+          max-width: none;
+          margin: 6px auto 20px;
+          padding: 0 4px;
+          gap: 8px;
+        }
+        .more-note-lead {
+          font-size: 19px;
+          line-height: 1.5;
+        }
+        .more-note-control {
+          font-size: 17px;
+          line-height: 1.52;
+        }
         .more-demo-inner {
           grid-template-columns: 1fr;
         }
@@ -1076,7 +1180,10 @@
       }
     </style>
 
-    <p class="more-demo-note">When references are highly similar, humans can still tell them apart, but text prompts often fail to encode these subtle identity cues. As a result, existing 3D-RoPE-based methods may still suffer from <span style="color:#ff7b7b; font-weight:700;">reference confusion</span>. Here we explicitly enforce shot-level control: <span class="more-demo-char1">@Character1</span> = top reference, <span class="more-demo-char2">@Character2</span> = bottom reference.</p>
+    <p class="more-demo-note">
+      <span class="more-note-lead">When references share <span class="more-key-main">highly overlapping semantic attributes</span>, text prompts alone are often too coarse to encode <span class="more-key-accent">fine-grained identity cues</span>.</span>
+      <span class="more-note-control">Here we explicitly specify <span class="more-key-main">shot-level control</span>: <span class="more-demo-char1">@Character1</span> denotes the top reference, and <span class="more-demo-char2">@Character2</span> denotes the bottom reference.</span>
+    </p>
 
     <div class="more-demo-grid">
       <div class="more-demo-card">
