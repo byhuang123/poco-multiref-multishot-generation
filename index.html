@@ -679,6 +679,7 @@
             font-size: 14px;
             line-height: 1.7;
             letter-spacing: 0.01em;
+            font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
           }
           .poco-math-paper {
             padding: 16px 18px;
@@ -732,6 +733,7 @@
             color: rgba(255, 255, 255, 0.68);
             font-size: 14px;
             line-height: 1.72;
+            font-family: 'Avenir Next', 'Helvetica Neue', sans-serif;
           }
           @media (max-width: 1100px) {
             .poco-math-grid {
@@ -834,7 +836,7 @@
                 <div class="poco-math-paper">
                 <div class="poco-math-formula-flow">
                   \[
-                  \Delta^{s}_{m,n} = s(x_m) - s(x_n) \in \{0,1\}^{K}
+                  \Delta^{s}_{m,n} = \left| s(x_m) - s(x_n) \right| \in \{0,1\}^{K}
                   \]
                 </div>
                 </div>
@@ -872,7 +874,7 @@
                   \end{bmatrix}
                   \]
                   \[
-                  \phi_i = \frac{2\pi i}{K} - \pi
+                  \phi_i = \frac{2\pi i - \pi}{K}
                   \]
                 </div>
                 </div>
@@ -913,7 +915,7 @@
             (a) The overall architecture combines reference images, multi-shot captions, and latent video features through VAE and MultiShot-DiT blocks.
             Each block includes <span style="color:#55d9ff; font-weight:700;">Hierarchical Cross-Attention</span> (b) and <span style="color:#ffbf47; font-weight:700;">Self-Attention with SideInfo-RoPE</span> (c).
             (b) The hierarchical mask allows reference tokens to attend globally to all captions, while each shot's video tokens attend only to its corresponding text segment.
-            (c) SideInfo-RoPE encodes reference-aware phase offsets in the rotary embedding space, softly routing tokens of different references to distinct phase manifolds and maintaining identity consistency across shots.
+            (c) SideInfo-RoPE assigns reference-specific phase codes in the rotary embedding space, improving shot-reference alignment and maintaining identity consistency across shots.
           </p>
           </div>
         </div>
