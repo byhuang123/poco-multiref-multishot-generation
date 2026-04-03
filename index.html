@@ -266,7 +266,7 @@
   <div class="authors-modern-container">
     <div class="authors-modern-row">
       <a href="https://scholar.google.com/citations?user=HOM48QgAAAAJ&hl=en" class="author-modern-link">
-        <span class="author-name-modern">Binyuanhuang<sup>1</sup></span>
+        <span class="author-name-modern">Binyuan Huang<sup>1</sup></span>
       </a>
       <a href="https://scholar.google.com/citations?hl=zh-CN&user=9YBKORgAAAAJ" class="author-modern-link">
         <span class="author-name-modern">Yuning Lu<sup>2,†</sup></span>
@@ -278,7 +278,7 @@
         <span class="author-name-modern">Hualiang Wang<sup>3</sup></span> 
       </a>
       <a href="#" class="author-modern-link">
-        <span class="author-name-modern">Mu liu<sup>4</sup></span>
+        <span class="author-name-modern">Mu Liu<sup>4</sup></span>
       </a>
       <a href="#" class="author-modern-link">
         <span class="author-name-modern">Daiqing Yang<sup>1</sup></span>
@@ -301,10 +301,10 @@
       <img src="./src/img/th.png" alt="arXiv" style="width: 20px; height: 15px;">
       <span>arXiv</span>
     </span>
-    <span style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 120px; padding: 10px 16px; border-radius: 12px; font-size: 19px; font-weight: 700; color: #ffffff; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(4px); box-shadow: 0 8px 24px rgba(0,0,0,0.18);">
+    <a target="_blank" href="https://github.com/byhuang123/PoCo" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-width: 120px; padding: 10px 16px; border-radius: 12px; font-size: 19px; font-weight: 700; color: #ffffff; text-decoration: none; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.45); backdrop-filter: blur(4px); box-shadow: 0 8px 24px rgba(0,0,0,0.18);">
       <img src="./src/img/github.png" alt="GitHub" style="width: 18px; height: 18px;">
       <span>Code</span>
-    </span>
+    </a>
   </div>
 
 </div>
@@ -524,7 +524,14 @@
       <div style="background: #0a0a0a; border-radius: 22px; padding: 24px; text-align: center; position: relative; overflow: hidden;">
         <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 50%), radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1), transparent 50%); pointer-events: none;"></div>
 
-        <img src="./motivation.png" alt="Motivation" style="position: relative; z-index: 1; width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" />
+        <p style="position: relative; z-index: 1; margin: 0 0 14px 0; color: rgba(255,255,255,0.92); font-size: 20px; line-height: 1.65; text-align: left; font-weight: 400;">
+          Why does reference confusion appear even when humans can distinguish these identities?
+          The core issue is that text prompts often cannot encode such fine-grained visual cues, so attention may still retrieve the wrong reference context.
+        </p>
+
+        <div style="position: relative; z-index: 1; padding: 14px; border-radius: 16px; background: linear-gradient(180deg, #fbfbfd 0%, #eef2f7 100%); border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 12px 28px rgba(0,0,0,0.18);">
+          <img src="./motivation.png" alt="Motivation" style="width: 100%; height: auto; display: block; border-radius: 10px; background: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.08);" />
+        </div>
 
         <p style="position: relative; z-index: 1; margin: 18px 0 0 0; color: white; font-size: 20px; line-height: 1.6; text-align: left; font-weight: 400;">
           Comparison of different strategies for multi-reference, multi-shot video generation.
@@ -534,6 +541,349 @@
           Right: spatially averaged self-attention over concatenated reference and shot tokens.
           \(\mathrm{AttnScore}(\mathrm{Shot}_i \rightarrow \mathrm{Ref}_j)\) denotes the mean attention from \(\mathrm{Shot}_i\) to \(\mathrm{Ref}_j\).
         </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!------------- Core Idea in Equations ------------------>
+<div class="content" style="display: flex; flex-direction: column; align-items: center; padding: 12px 20px 24px; width: 100%; box-sizing: border-box;">
+  <h2 style="text-align:center; color: white; background: none !important; -webkit-text-fill-color: white !important; font-size: 48px; margin-bottom: 34px; font-weight: 700; letter-spacing: 2px;">🧠 SideInfo-RoPE</h2>
+
+  <div style="max-width: 1400px; margin: auto; position: relative; width: 100%;">
+    <div style="background: linear-gradient(135deg, #13f1fc 0%, #0470dc 45%, #7f5af0 100%); padding: 3px; border-radius: 25px; box-shadow: 0 20px 60px rgba(4, 112, 220, 0.25);">
+      <div style="background: #0a0a0a; border-radius: 22px; padding: 30px; position: relative; overflow: hidden;">
+        <div style="position: absolute; inset: 0; background: radial-gradient(circle at 14% 18%, rgba(19, 241, 252, 0.12), transparent 34%), radial-gradient(circle at 86% 82%, rgba(127, 90, 240, 0.12), transparent 38%); pointer-events: none;"></div>
+
+        <style>
+          .poco-math-shell {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            gap: 24px;
+          }
+          .poco-math-intro {
+            display: grid;
+            gap: 8px;
+            max-width: 860px;
+            padding: 0 4px;
+            justify-items: center;
+            margin: 0 auto;
+            text-align: center;
+          }
+          .poco-math-kicker {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 6px 12px;
+            border-radius: 999px;
+            color: #06131c;
+            background: linear-gradient(135deg, #99f6ff, #8affc1);
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+          }
+          .poco-math-title {
+            margin: 0;
+            color: #ffffff;
+            font-size: 32px;
+            line-height: 1.12;
+            font-weight: 700;
+          }
+          .poco-math-desc {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 15px;
+            line-height: 1.75;
+          }
+          .poco-math-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+          }
+          .poco-math-card {
+            min-height: 100%;
+            padding: 26px;
+            border-radius: 22px;
+            background:
+              linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+              rgba(8, 12, 24, 0.92);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 18px 40px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+          }
+          .poco-math-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(circle at top right, rgba(127, 231, 255, 0.12), transparent 38%);
+          }
+          .poco-math-card.base::before {
+            background: radial-gradient(circle at top right, rgba(255, 191, 71, 0.12), transparent 38%);
+          }
+          .poco-math-card.poco::before {
+            background: radial-gradient(circle at top right, rgba(127, 231, 255, 0.14), transparent 38%);
+          }
+          .poco-math-tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #07131b;
+            background: linear-gradient(135deg, #7fe7ff, #8affc1);
+            font-weight: 800;
+          }
+          .poco-math-card.base .poco-math-tag {
+            background: linear-gradient(135deg, #ffd36b, #ff9f5a);
+          }
+          .poco-math-card h3 {
+            margin: 14px 0 8px;
+            color: #fff;
+            font-size: 28px;
+            font-weight: 700;
+          }
+          .poco-math-subtitle {
+            margin: 0 0 18px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 14px;
+            line-height: 1.65;
+            letter-spacing: 0.01em;
+          }
+          .poco-math-section {
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+          }
+          .poco-math-section:first-of-type {
+            padding-top: 0;
+            border-top: none;
+          }
+          .poco-math-section-title {
+            margin: 0 0 10px;
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: none;
+          }
+          .poco-math-preline {
+            margin: 0 0 8px;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 14px;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+          }
+          .poco-math-paper {
+            padding: 16px 18px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+            overflow: hidden;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          .poco-math-paper + .poco-math-paper {
+            margin-top: 12px;
+          }
+          .poco-math-paper::-webkit-scrollbar {
+            display: none;
+          }
+          .poco-math-paper mjx-container,
+          .poco-math-paper mjx-container[display="true"] {
+            overflow: visible !important;
+            max-width: 100% !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+          }
+          .poco-math-paper mjx-container::-webkit-scrollbar,
+          .poco-math-paper mjx-container[display="true"]::-webkit-scrollbar {
+            display: none !important;
+          }
+          .poco-math-formula-flow {
+            color: #fff;
+            font-size: 0.98rem;
+            line-height: 1.82;
+            overflow: hidden;
+            padding: 0;
+          }
+          .poco-math-formula-flow mjx-container[display="true"] {
+            font-size: 108% !important;
+          }
+          .poco-math-emphasis {
+            margin-top: 16px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            line-height: 1.72;
+          }
+          .poco-math-inline-note {
+            margin: 10px 0 0;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 14px;
+            line-height: 1.72;
+          }
+          @media (max-width: 1100px) {
+            .poco-math-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+          body {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+          }
+          body::-webkit-scrollbar {
+            display: none;
+          }
+        </style>
+
+        <div class="poco-math-shell">
+          <div class="poco-math-intro">
+            <span class="poco-math-kicker">Method Highlight</span>
+            <h3 class="poco-math-title">From RoPE and 3D-RoPE to SideInfo-RoPE</h3>
+            <p class="poco-math-desc">
+              A cleaner view of the method: the left column shows the original RoPE and 3D-RoPE setup, and the right column highlights the single conceptual change that matters for PoCo, adding the side-information axis \(s\).
+            </p>
+          </div>
+
+          <div class="poco-math-grid">
+            <div class="poco-math-card base">
+              <span class="poco-math-tag">Original</span>
+              <h3>RoPE / 3D-RoPE</h3>
+              <p class="poco-math-subtitle">
+                Preliminaries first, then the extension from 1D RoPE to the 3D spatial-temporal case.
+              </p>
+
+              <div class="poco-math-section">
+                <div class="poco-math-section-title">RoPE Preliminary</div>
+                <p class="poco-math-preline">RoPE injects relative position directly into the attention score via rotation.</p>
+                <div class="poco-math-paper">
+                <div class="poco-math-formula-flow">
+                  \[
+                  q_m^\top R_{\Delta_{m,n}}(\theta) k_n
+                  \]
+                  \[
+                  R_{\Delta_{m,n}} = \bigoplus_{i=1}^{D/2} R^{(i)}_{\Delta_{m,n}}
+                  \]
+                  \[
+                  R^{(i)}_{\Delta_{m,n}}(\theta)=
+                  \begin{bmatrix}
+                  \cos(\omega_i \cdot \Delta_{m,n}) & -\sin(\omega_i \cdot \Delta_{m,n}) \\
+                  \sin(\omega_i \cdot \Delta_{m,n}) & \cos(\omega_i \cdot \Delta_{m,n})
+                  \end{bmatrix}
+                  \]
+                  \[
+                  \omega_i = \theta^{-2i/D}
+                  \]
+                </div>
+                </div>
+              </div>
+
+              <div class="poco-math-section">
+                <div class="poco-math-section-title">3D-RoPE</div>
+                <p class="poco-math-preline">First define 3D relative displacement over temporal and spatial axes.</p>
+                <div class="poco-math-paper">
+                  <div class="poco-math-formula-flow">
+                    \[
+                    \Delta^{p}_{m,n} =
+                    \left(\Delta^{t}_{m,n}, \Delta^{h}_{m,n}, \Delta^{w}_{m,n}\right)
+                    \]
+                  </div>
+                </div>
+                <p class="poco-math-preline">Then apply blockwise rotations in the allocated \(t\), \(h\), and \(w\) subspaces.</p>
+                <div class="poco-math-paper">
+                <div class="poco-math-formula-flow">
+                  \[
+                  \begin{aligned}
+                  R^{p}_{\Delta_{m,n}}
+                  &=
+                  \Bigl\{\bigoplus_{i=1}^{D_t/2} R^{(i)}_{\Delta^t_{m,n}}\Bigr\} \\
+                  &\quad \oplus
+                  \Bigl\{\bigoplus_{i=1+\frac{D_t}{2}}^{\frac{D_t + D_h}{2}} R^{(i)}_{\Delta^h_{m,n}}\Bigr\} \\
+                  &\quad \oplus
+                  \Bigl\{\bigoplus_{i=\frac{D_t + D_h}{2}+1}^{D/2} R^{(i)}_{\Delta^w_{m,n}}\Bigr\}
+                  \end{aligned}
+                  \]
+                  </div>
+                </div>
+                <p class="poco-math-inline-note">
+                  Only the \(t,h,w\) axes are modeled here, so reference identity is still resolved mainly through semantic similarity.
+                </p>
+              </div>
+            </div>
+
+            <div class="poco-math-card poco">
+              <span class="poco-math-tag">Ours</span>
+              <h3>SideInfo-RoPE</h3>
+              <p class="poco-math-subtitle">
+                Sec. 3.2: augment the original 3D-RoPE axes with a side-information coordinate \(s\).
+              </p>
+              <div class="poco-math-section">
+                <div class="poco-math-section-title">Side Information Distance</div>
+                <p class="poco-math-preline">Define side-information mismatch between tokens as a binary vector distance.</p>
+                <div class="poco-math-paper">
+                <div class="poco-math-formula-flow">
+                  \[
+                  \Delta^{s}_{m,n} = s(x_m) - s(x_n) \in \{0,1\}^{K}
+                  \]
+                </div>
+                </div>
+                <p class="poco-math-inline-note">
+                  Here \(s(x)\in\{0,1\}^{K}\) is a K-dimensional side-information vector; \(s_i(x)=1\) means reference \(i\) (for example, @Character1 or @Character2) is active for the current token/shot context.
+                </p>
+              </div>
+
+              <div class="poco-math-section">
+                <div class="poco-math-section-title">SideInfo-RoPE Rotation</div>
+                <p class="poco-math-preline">Extend \(p=(t,h,w)\) to \(p^\ast=(t,h,w,s)\) and add the side-information rotation blocks.</p>
+                <div class="poco-math-paper">
+                <div class="poco-math-formula-flow">
+                  \[
+                  \begin{aligned}
+                  R^{p^\ast}_{\Delta_{m,n}}
+                  &=
+                  \Bigl\{\bigoplus_{i=1}^{D_t/2} R^{(i)}_{\Delta^t_{m,n}}\Bigr\} \\
+                  &\quad \oplus
+                  \Bigl\{\bigoplus_{i=1}^{D_s/2} \hat{R}^{(i)}_{\Delta^s_{m,n}}\Bigr\} \\
+                  &\quad \oplus
+                  \Bigl\{\bigoplus_{i=1+\frac{D_t + D_s}{2}}^{\frac{D_t + D_s + D_h}{2}} R^{(i)}_{\Delta^h_{m,n}}\Bigr\} \\
+                  &\quad \oplus
+                  \Bigl\{\bigoplus_{i=\frac{D_t + D_s + D_h}{2}+1}^{D/2} R^{(i)}_{\Delta^w_{m,n}}\Bigr\}
+                  \end{aligned}
+                  \]
+                  \[
+                  \hat{R}^{(i)}_{\Delta^s_{m,n}}
+                  =
+                  \begin{bmatrix}
+                  \cos\!\bigl(\phi_i \cdot \Delta^{s}_{m,n}(i)\bigr) &
+                  -\sin\!\bigl(\phi_i \cdot \Delta^{s}_{m,n}(i)\bigr) \\
+                  \sin\!\bigl(\phi_i \cdot \Delta^{s}_{m,n}(i)\bigr) &
+                  \cos\!\bigl(\phi_i \cdot \Delta^{s}_{m,n}(i)\bigr)
+                  \end{bmatrix}
+                  \]
+                  \[
+                  \phi_i = \frac{2\pi i}{K} - \pi
+                  \]
+                </div>
+                </div>
+              </div>
+
+              <div class="poco-math-emphasis">
+                The visual point is simple: we do not replace RoPE, we extend it with one more axis. Tokens sharing the same side information remain phase-aligned, while mismatched references receive phase offsets that suppress cross-reference confusion.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -724,18 +1074,18 @@
       }
     </style>
 
-    <p class="more-demo-note">When references are highly similar, many methods suffer from <span style="color:#ff7b7b; font-weight:700;">reference confusion</span>. Here we explicitly enforce shot-level control: <span class="more-demo-char1">@character1</span> = top reference, <span class="more-demo-char2">@character2</span> = bottom reference.</p>
+    <p class="more-demo-note">When references are highly similar, humans can still tell them apart, but text prompts often fail to encode these subtle identity cues. As a result, existing 3D-RoPE-based methods may still suffer from <span style="color:#ff7b7b; font-weight:700;">reference confusion</span>. Here we explicitly enforce shot-level control: <span class="more-demo-char1">@Character1</span> = top reference, <span class="more-demo-char2">@Character2</span> = bottom reference.</p>
 
     <div class="more-demo-grid">
       <div class="more-demo-card">
         <div class="more-demo-inner">
           <div class="more-demo-refs">
             <div class="more-demo-ref-item">
-              <span class="more-demo-char-badge char1">@character1</span>
+              <span class="more-demo-char-badge char1">@Character1</span>
               <img src="./PoCo_video/demo5/ref1.jpg" alt="Demo 5 Reference 1">
             </div>
             <div class="more-demo-ref-item">
-              <span class="more-demo-char-badge char2">@character2</span>
+              <span class="more-demo-char-badge char2">@Character2</span>
               <img src="./PoCo_video/demo5/ref2.jpg" alt="Demo 5 Reference 2">
             </div>
           </div>
@@ -750,9 +1100,9 @@
               <div class="more-demo-caption">
                 <span class="schedule-pill">A</span>
                 <div class="map-lines">
-                  <div class="map-line">SHOT1 → <span class="more-demo-char1">@character1</span></div>
-                  <div class="map-line">SHOT2 → <span class="more-demo-char2">@character2</span></div>
-                  <div class="map-line">SHOT3 → <span class="more-demo-char1">@character1</span></div>
+                  <div class="map-line">Shot1 → <span class="more-demo-char1">@Character1</span></div>
+                  <div class="map-line">Shot2 → <span class="more-demo-char2">@Character2</span></div>
+                  <div class="map-line">Shot3 → <span class="more-demo-char1">@Character1</span></div>
                 </div>
               </div>
             </div>
@@ -766,9 +1116,9 @@
               <div class="more-demo-caption">
                 <span class="schedule-pill">B</span>
                 <div class="map-lines">
-                  <div class="map-line">SHOT1 → <span class="more-demo-char2">@character2</span></div>
-                  <div class="map-line">SHOT2 → <span class="more-demo-char1">@character1</span></div>
-                  <div class="map-line">SHOT3 → <span class="more-demo-char2">@character2</span></div>
+                  <div class="map-line">Shot1 → <span class="more-demo-char2">@Character2</span></div>
+                  <div class="map-line">Shot2 → <span class="more-demo-char1">@Character1</span></div>
+                  <div class="map-line">Shot3 → <span class="more-demo-char2">@Character2</span></div>
                 </div>
               </div>
             </div>
@@ -780,11 +1130,11 @@
         <div class="more-demo-inner">
           <div class="more-demo-refs">
             <div class="more-demo-ref-item">
-              <span class="more-demo-char-badge char1">@character1</span>
+              <span class="more-demo-char-badge char1">@Character1</span>
               <img src="./PoCo_video/demo6/ref1.png" alt="Demo 6 Reference 1">
             </div>
             <div class="more-demo-ref-item">
-              <span class="more-demo-char-badge char2">@character2</span>
+              <span class="more-demo-char-badge char2">@Character2</span>
               <img src="./PoCo_video/demo6/ref2.png" alt="Demo 6 Reference 2">
             </div>
           </div>
@@ -799,9 +1149,9 @@
               <div class="more-demo-caption">
                 <span class="schedule-pill">A</span>
                 <div class="map-lines">
-                  <div class="map-line">SHOT1 → <span class="more-demo-char1">@character1</span></div>
-                  <div class="map-line">SHOT2 → <span class="more-demo-char2">@character2</span></div>
-                  <div class="map-line">SHOT3 → <span class="more-demo-char1">@character1</span></div>
+                  <div class="map-line">Shot1 → <span class="more-demo-char1">@Character1</span></div>
+                  <div class="map-line">Shot2 → <span class="more-demo-char2">@Character2</span></div>
+                  <div class="map-line">Shot3 → <span class="more-demo-char1">@Character1</span></div>
                 </div>
               </div>
             </div>
@@ -815,9 +1165,9 @@
               <div class="more-demo-caption">
                 <span class="schedule-pill">B</span>
                 <div class="map-lines">
-                  <div class="map-line">SHOT1 → <span class="more-demo-char2">@character2</span></div>
-                  <div class="map-line">SHOT2 → <span class="more-demo-char1">@character1</span></div>
-                  <div class="map-line">SHOT3 → <span class="more-demo-char2">@character2</span></div>
+                  <div class="map-line">Shot1 → <span class="more-demo-char2">@Character2</span></div>
+                  <div class="map-line">Shot2 → <span class="more-demo-char1">@Character1</span></div>
+                  <div class="map-line">Shot3 → <span class="more-demo-char2">@Character2</span></div>
                 </div>
               </div>
             </div>
@@ -836,7 +1186,7 @@
   <div style="position: relative; max-width: 1200px; width: 100%; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1)); padding: 30px; border-radius: 20px; border: 2px solid rgba(208, 234, 102, 0.5); box-shadow: 0 10px 40px rgba(102, 234, 124, 0.2), inset 0 0 20px rgba(102, 126, 234, 0.05); backdrop-filter: blur(10px);">
     <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(90deg, #b7ea66, #4ba25b); padding: 8px 24px; border-radius: 20px; font-size: 12px; font-weight: 600; color: white; letter-spacing: 1px; text-transform: uppercase;">Ethics Concerns</div>
     <div style="background: none; padding: 0; margin: 0; font-family: 'JetBrains Mono', 'Fira Code', 'Monaco', monospace; font-size: 15px; color: #e0e0e0; line-height: 1.6; text-shadow: 0 0 10px rgba(102, 126, 234, 0.3);">
-    The videos in these demos are generated by models, and are intended solely to showcase the capabilities of this research. If you have any concerns, please contact us at lyn0@mail.ustc.edu.cn, and we will promptly remove them.
+    The videos in these demos are generated by models, and are intended solely to showcase the capabilities of this research. If you have any concerns, please contact us at luyuningx@gmail.com, and we will promptly remove them.
     </div>
   </div>
 </div>
