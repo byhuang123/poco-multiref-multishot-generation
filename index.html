@@ -3,9 +3,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="./src/img/fanqie.png?v=20260403a">
@@ -58,7 +55,7 @@
   <!-- Background videos for the header (rotating) -->
   <div class="intro-video-container" style="position: fixed; top: -1px; left: 0; width: 100vw; height: calc(100vh + 2px); z-index: -10; transition: opacity 0.5s ease; overflow: hidden;">
     
-    <video autoplay muted loop playsinline class="intro-bg-video active" id="introBgVideo1" style="position: absolute; top: -1px; left: 0; width: 100vw; height: calc(100vh + 2px); object-fit: cover; opacity: 1; transition: opacity 1s ease; filter: brightness(1.2);">
+    <video autoplay muted loop playsinline preload="metadata" class="intro-bg-video active" id="introBgVideo1" style="position: absolute; top: -1px; left: 0; width: 100vw; height: calc(100vh + 2px); object-fit: cover; opacity: 1; transition: opacity 1s ease; filter: brightness(1.2);">
       <source src="./PoCo_video/first.mp4" type="video/mp4">
     </video>
     <!-- Light overlay for better text visibility -->
@@ -431,7 +428,7 @@
                 <img src="./PoCo_video/demo1/ref2.png" alt="Demo 1 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video autoplay muted loop controls playsinline preload="metadata">
+                <video class="poco-managed-video" muted loop controls playsinline preload="none">
                   <source src="./PoCo_video/demo1/demo1.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -446,7 +443,7 @@
                 <img src="./PoCo_video/demo2/ref2.png" alt="Demo 2 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video autoplay muted loop controls playsinline preload="metadata">
+                <video class="poco-managed-video" muted loop controls playsinline preload="none">
                   <source src="./PoCo_video/demo2/demo2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -461,7 +458,7 @@
                 <img src="./PoCo_video/demo3/ref2.png" alt="Demo 3 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video autoplay muted loop controls playsinline preload="metadata">
+                <video class="poco-managed-video" muted loop controls playsinline preload="none">
                   <source src="./PoCo_video/demo3/demo3.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -476,7 +473,7 @@
                 <img src="./PoCo_video/demo4/ref2.png?v=20260318-2239" alt="Demo 4 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video autoplay muted loop controls playsinline preload="metadata">
+                <video class="poco-managed-video" muted loop controls playsinline preload="none">
                   <source src="./PoCo_video/demo4/demo4.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -547,7 +544,7 @@
         </p>
 
         <div style="position: relative; z-index: 1; padding: 14px; border-radius: 16px; background: linear-gradient(180deg, #fbfbfd 0%, #eef2f7 100%); border: 1px solid rgba(255,255,255,0.28); box-shadow: 0 12px 28px rgba(0,0,0,0.18);">
-          <img src="./motivation.png?v=20260403c" alt="Motivation" style="width: 100%; height: auto; display: block; border-radius: 10px; background: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.08);" />
+          <img loading="lazy" decoding="async" src="./motivation.png?v=20260403c" alt="Motivation" style="width: 100%; height: auto; display: block; border-radius: 10px; background: #ffffff; box-shadow: 0 5px 15px rgba(0,0,0,0.08);" />
         </div>
 
         <p style="position: relative; z-index: 1; margin: 18px 0 0 0; color: white; font-size: 20px; line-height: 1.6; text-align: left; font-weight: 400;">
@@ -967,6 +964,8 @@
         <div style="display: flex; gap: 20px; justify-content: center;">
           <div class="video-wrapper" style="flex: 1; max-width: 1400px; width: 100%;">
         <img
+          loading="lazy"
+          decoding="async"
           src="./pipeline.png"
           alt="Pipeline"
           style="width: 100%; height: auto; display: block; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);" />
@@ -1201,7 +1200,7 @@
           <div class="more-demo-videos">
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video autoplay muted loop playsinline controls preload="metadata">
+                <video class="poco-managed-video" muted loop playsinline controls preload="none">
                   <source src="./PoCo_video/demo5/poco_group2_confuse1.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1217,7 +1216,7 @@
             </div>
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video autoplay muted loop playsinline controls preload="metadata">
+                <video class="poco-managed-video" muted loop playsinline controls preload="none">
                   <source src="./PoCo_video/demo5/poco_group2_confuse2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1250,7 +1249,7 @@
           <div class="more-demo-videos">
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video autoplay muted loop playsinline controls preload="metadata">
+                <video class="poco-managed-video" muted loop playsinline controls preload="none">
                   <source src="./PoCo_video/demo6/poco_group9_confuse1.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1266,7 +1265,7 @@
             </div>
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video autoplay muted loop playsinline controls preload="metadata">
+                <video class="poco-managed-video" muted loop playsinline controls preload="none">
                   <source src="./PoCo_video/demo6/poco_group9_confuse2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1439,6 +1438,66 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
+  }
+
+  // Load and play demo videos only when visible, and keep one active at a time.
+  const managedVideos = Array.from(document.querySelectorAll('video.poco-managed-video'));
+  const pauseOtherManagedVideos = (activeVideo) => {
+    managedVideos.forEach((video) => {
+      if (video !== activeVideo && !video.paused) {
+        video.pause();
+      }
+    });
+  };
+
+  managedVideos.forEach((video) => {
+    video.addEventListener('play', () => pauseOtherManagedVideos(video));
+  });
+
+  if ('IntersectionObserver' in window) {
+    const visibilityRatios = new Map();
+    const playMostVisibleManagedVideo = () => {
+      let bestVideo = null;
+      let bestRatio = 0;
+
+      managedVideos.forEach((video) => {
+        const ratio = visibilityRatios.get(video) || 0;
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestVideo = video;
+        }
+      });
+
+      if (bestVideo && bestRatio >= 0.22) {
+        pauseOtherManagedVideos(bestVideo);
+        if (bestVideo.paused) {
+          const playPromise = bestVideo.play();
+          if (playPromise && typeof playPromise.catch === 'function') {
+            playPromise.catch(() => {});
+          }
+        }
+      } else {
+        managedVideos.forEach((video) => {
+          if (!video.paused) video.pause();
+        });
+      }
+    };
+
+    const videoObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          visibilityRatios.set(video, entry.isIntersecting ? entry.intersectionRatio : 0);
+        });
+        playMostVisibleManagedVideo();
+      },
+      {
+        threshold: [0, 0.15, 0.3, 0.5, 0.75],
+        rootMargin: '220px 0px'
+      }
+    );
+
+    managedVideos.forEach((video) => videoObserver.observe(video));
   }
 });
 </script>
