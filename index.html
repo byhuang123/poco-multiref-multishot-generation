@@ -428,7 +428,7 @@
                 <img src="./PoCo_video/demo1/ref2.png" alt="Demo 1 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video class="poco-managed-video" muted loop controls playsinline preload="auto">
+                <video class="poco-managed-video" autoplay muted loop controls playsinline preload="auto">
                   <source src="./PoCo_video/demo1/demo1.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -443,7 +443,7 @@
                 <img src="./PoCo_video/demo2/ref2.png" alt="Demo 2 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video class="poco-managed-video" muted loop controls playsinline preload="auto">
+                <video class="poco-managed-video" autoplay muted loop controls playsinline preload="auto">
                   <source src="./PoCo_video/demo2/demo2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -458,7 +458,7 @@
                 <img src="./PoCo_video/demo3/ref2.png" alt="Demo 3 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video class="poco-managed-video" muted loop controls playsinline preload="auto">
+                <video class="poco-managed-video" autoplay muted loop controls playsinline preload="auto">
                   <source src="./PoCo_video/demo3/demo3.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -473,7 +473,7 @@
                 <img src="./PoCo_video/demo4/ref2.png?v=20260318-2239" alt="Demo 4 Reference 2">
               </div>
               <div class="poco-demo-video">
-                <video class="poco-managed-video" muted loop controls playsinline preload="auto">
+                <video class="poco-managed-video" autoplay muted loop controls playsinline preload="auto">
                   <source src="./PoCo_video/demo4/demo4.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1200,7 +1200,7 @@
           <div class="more-demo-videos">
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video class="poco-managed-video" muted loop playsinline controls preload="auto">
+                <video class="poco-managed-video" autoplay muted loop playsinline controls preload="auto">
                   <source src="./PoCo_video/demo5/poco_group2_confuse1.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1216,7 +1216,7 @@
             </div>
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video class="poco-managed-video" muted loop playsinline controls preload="auto">
+                <video class="poco-managed-video" autoplay muted loop playsinline controls preload="auto">
                   <source src="./PoCo_video/demo5/poco_group2_confuse2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1249,7 +1249,7 @@
           <div class="more-demo-videos">
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video class="poco-managed-video" muted loop playsinline controls preload="auto">
+                <video class="poco-managed-video" autoplay muted loop playsinline controls preload="auto">
                   <source src="./PoCo_video/demo6/poco_group9_confuse1.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1265,7 +1265,7 @@
             </div>
             <div class="more-demo-video-wrap">
               <div class="more-demo-video">
-                <video class="poco-managed-video" muted loop playsinline controls preload="auto">
+                <video class="poco-managed-video" autoplay muted loop playsinline controls preload="auto">
                   <source src="./PoCo_video/demo6/poco_group9_confuse2.mp4" type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
@@ -1440,65 +1440,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Load and play demo videos only when visible, and keep one active at a time.
-  const managedVideos = Array.from(document.querySelectorAll('video.poco-managed-video'));
-  const pauseOtherManagedVideos = (activeVideo) => {
-    managedVideos.forEach((video) => {
-      if (video !== activeVideo && !video.paused) {
-        video.pause();
-      }
-    });
-  };
-
-  managedVideos.forEach((video) => {
-    video.addEventListener('play', () => pauseOtherManagedVideos(video));
-  });
-
-  if ('IntersectionObserver' in window) {
-    const visibilityRatios = new Map();
-    const playMostVisibleManagedVideo = () => {
-      let bestVideo = null;
-      let bestRatio = 0;
-
-      managedVideos.forEach((video) => {
-        const ratio = visibilityRatios.get(video) || 0;
-        if (ratio > bestRatio) {
-          bestRatio = ratio;
-          bestVideo = video;
-        }
-      });
-
-      if (bestVideo && bestRatio >= 0.22) {
-        pauseOtherManagedVideos(bestVideo);
-        if (bestVideo.paused) {
-          const playPromise = bestVideo.play();
-          if (playPromise && typeof playPromise.catch === 'function') {
-            playPromise.catch(() => {});
-          }
-        }
-      } else {
-        managedVideos.forEach((video) => {
-          if (!video.paused) video.pause();
-        });
-      }
-    };
-
-    const videoObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const video = entry.target;
-          visibilityRatios.set(video, entry.isIntersecting ? entry.intersectionRatio : 0);
-        });
-        playMostVisibleManagedVideo();
-      },
-      {
-        threshold: [0, 0.15, 0.3, 0.5, 0.75],
-        rootMargin: '220px 0px'
-      }
-    );
-
-    managedVideos.forEach((video) => videoObserver.observe(video));
-  }
 });
 </script>
 
